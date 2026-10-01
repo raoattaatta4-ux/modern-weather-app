@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1220" />
+  <meta name="description" content="A modern, responsive weather app powered by Open-Meteo." />
+  <title>SkyCast — Modern Weather</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="SkyCast home">
+        <span class="brand-mark">☁</span>
+        <span>SkyCast</span>
+      </a>
+
+      <div class="top-actions">
+        <button id="unitToggle" class="unit-toggle" type="button" aria-label="Toggle temperature unit">
+          <span id="unitC" class="active">°C</span>
+          <span>°F</span>
+        </button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">LIVE WEATHER, BEAUTIFULLY SIMPLE</p>
+        <h1>Know the weather.<br><span>Plan your day.</span></h1>
+        <p class="hero-sub">Search any city for current conditions, an hourly outlook, and a 7-day forecast.</p>
+      </div>
+
+      <div class="search-panel">
+        <form id="searchForm" class="search-box" autocomplete="off">
+          <span class="search-icon">⌕</span>
+          <input id="cityInput" type="text" placeholder="Search city..." aria-label="Search city" />
+          <button class="search-btn" type="submit">Search</button>
+        </form>
+        <div id="suggestions" class="suggestions hidden" role="listbox"></div>
+        <button id="locationBtn" class="location-btn" type="button">
+          <span>◎</span> Use my location
+        </button>
+        <div id="recentSearches" class="recent-searches"></div>
+      </div>
+    </section>
+
+    <section id="status" class="status hidden"></section>
+
+    <section id="weatherContent" class="weather-layout hidden">
+      <article class="card current-card">
+        <div class="current-head">
+          <div>
+            <p id="locationLabel" class="location-label">—</p>
+            <p id="dateLabel" class="muted">—</p>
+          </div>
+          <span id="dayBadge" class="day-badge">Today</span>
+        </div>
+
+        <div class="current-main">
+          <div>
+            <div id="weatherIcon" class="weather-icon">☀️</div>
+            <p id="weatherText" class="weather-text">Clear sky</p>
+          </div>
+          <div class="temp-wrap">
+            <span id="currentTemp" class="current-temp">--°</span>
+            <p id="feelsLike" class="muted">Feels like --°</p>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat"><span>💧</span><div><small>Humidity</small><strong id="humidity">--%</strong></div></div>
+          <div class="stat"><span>💨</span><div><small>Wind</small><strong id="wind">-- km/h</strong></div></div>
+          <div class="stat"><span>◉</span><div><small>Pressure</small><strong id="pressure">-- hPa</strong></div></div>
+          <div class="stat"><span>☁</span><div><small>Cloud cover</small><strong id="cloudCover">--%</strong></div></div>
+        </div>
+      </article>
+
+      <article class="card highlights-card">
+        <div class="section-title-row">
+          <div>
+            <p class="eyebrow small">TODAY'S HIGHLIGHTS</p>
+            <h2>At a glance</h2>
+          </div>
+        </div>
+
+        <div class="highlights-grid">
+          <div class="highlight">
+            <span class="highlight-icon">🌅</span>
+            <div><small>Sunrise</small><strong id="sunrise">--:--</strong></div>
+          </div>
+          <div class="highlight">
+            <span class="highlight-icon">🌇</span>
+            <div><small>Sunset</small><strong id="sunset">--:--</strong></div>
+          </div>
+          <div class="highlight">
+            <span class="highlight-icon">☔</span>
+            <div><small>Rain now</small><strong id="rainNow">-- mm</strong></div>
+          </div>
+          <div class="highlight">
+            <span class="highlight-icon">🧭</span>
+            <div><small>Wind direction</small><strong id="windDirection">--</strong></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card hourly-card full-width">
+        <div class="section-title-row">
+          <div>
+            <p class="eyebrow small">NEXT 24 HOURS</p>
+            <h2>Hourly forecast</h2>
+          </div>
+        </div>
+        <div id="hourlyForecast" class="hourly-scroll"></div>
+      </article>
+
+      <article class="card forecast-card full-width">
+        <div class="section-title-row">
+          <div>
+            <p class="eyebrow small">WEEK AHEAD</p>
+            <h2>7-day forecast</h2>
+          </div>
+        </div>
+        <div id="dailyForecast" class="daily-grid"></div>
+      </article>
+    </section>
+
+    <footer>
+      <p>Weather data by <a href="https://open-meteo.com/" target="_blank" rel="noreferrer">Open-Meteo</a>. No API key required.</p>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
